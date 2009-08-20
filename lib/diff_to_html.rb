@@ -19,9 +19,9 @@ class DiffToHtml
 
   def line_class(line)
     if line[:op] == :removal
-      return " class=\"r\""
+      return " style=\"background-color: #fdd;\""
     elsif line[:op] == :addition
-      return " class=\"a\""
+      return " style=\"background-color: #dfd;\""
     else
       return ''
     end
@@ -38,7 +38,7 @@ class DiffToHtml
     klass = line_class(line)
     content = escape ? escape_content(line[:content]) : line[:content]
     padding = '&nbsp;' if klass != ''
-    @diff_result << "<tr#{klass}>\n<td class=\"ln\">#{line[:removed]}</td>\n<td class=\"ln\">#{line[:added]}</td>\n<td>#{padding}#{content}</td></tr>"
+    @diff_result << "<tr#{klass}>\n<td style=\"background-color: #ccc; width:23px; text-align:right\">#{line[:removed]}</td>\n<td style=\"background-color: #ccc; width:23px; text-align:right\">#{line[:added]}</td>\n<td>#{padding}#{content}</td></tr>"
   end
 
   def extract_block_content(block)
@@ -104,13 +104,13 @@ class DiffToHtml
       op = "Changed"
     end
     header = "#{op} #{binary}file #{@current_file_name}"
-    "<h2>#{header}</h2>\n"
+    "<h2 style=\"font-family:Verdana;font-size:12px;background-color: #bbb; font-weight: bold; line-height:25px; margin-bottom:2px; padding-left:5px\">#{header}</h2>\n"
   end
 
   def add_changes_to_result
     return if @current_file_name.nil?
     @diff_result << operation_description
-    @diff_result << '<table>'
+    @diff_result << '<table style=\"width:100%;border-collapse:collapse\">'
     unless @diff_lines.empty?
       removals = []
       additions = []
@@ -277,7 +277,7 @@ class DiffToHtml
 
       commit_info = extract_commit_info_from_git_show_output(raw_diff)
 
-      title = "<div class=\"title\">"
+      title = "<div style=\"background-color: #ddd; padding: 10px;font-family:Verdana;font-size:12px;}\">"
       title += "<strong>Message:</strong> #{message_array_as_html commit_info[:message]}<br />\n"
       title += "<strong>Commit</strong> #{commit_info[:commit]}<br />\n"
       title += "<strong>Branch:</strong> #{branch}\n<br />" unless branch =~ /\/head/
