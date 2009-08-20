@@ -262,7 +262,7 @@ class DiffToHtml
     if defined?(Test::Unit)
       previous_list = []
     else
-      previous_file = (defined?(THIS_FILE) && THIS_FILE) ? File.join(File.dirname(THIS_FILE), "../config/previously.txt") : "/tmp/previously.txt"
+      previous_file = (defined?(THIS_FILE) && THIS_FILE) ? File.join(File.dirname(THIS_FILE), "../previously.txt") : "/tmp/previously.txt"
       previous_list = (File.read(previous_file).to_a.map {|sha| sha.chomp!} if File.exist?(previous_file)) || []
     end
 
