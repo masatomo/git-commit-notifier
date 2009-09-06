@@ -13,7 +13,7 @@ class CommitHook
     project_path = Dir.getwd
     recipient = Git.mailing_list_address
     prefix = Git.repo_name
-    branch_name = (ref_name =~ /master$/i) ? "" : "/#{ref_name.split("/").last}"
+    branch_name = "/#{ref_name.split("/").last}"
 
     diff2html = DiffToHtml.new
     diff2html.diff_between_revisions rev1, rev2, prefix, ref_name
